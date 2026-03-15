@@ -44,7 +44,7 @@ git clone https://github.com/shanickcuello/kratos-hacking-ai.git
 cd kratos-hacking-ai
 uv pip install -e ".[tui]"
 docker compose -f docker/docker-compose.yml build
-ollama create kratos -f model/Modelfile
+ollama pull shanlogauthier/kratos
 uv run kratos --target 10.10.10.50
 ```
 
