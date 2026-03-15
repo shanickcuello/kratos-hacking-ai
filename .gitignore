@@ -1,0 +1,30 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+dist/
+build/
+*.egg-info/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.env
+*.log
+
+# Model files (too large for git)
+*.gguf
+model/*.gguf
+colab/
+*.safetensors
+
+# Training data
+kratos-model/data/raw/
+kratos-model/data/processed/*.jsonl
+kratos-model/data/*.jsonl
+kratos-model/data/*.parquet
+
+# Sessions
+.kratos/
+
+# OS
+.DS_Store

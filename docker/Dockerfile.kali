@@ -1,0 +1,51 @@
+FROM kalilinux/kali-rolling:latest
+
+# Avoid interactive prompts
+ENV DEBIAN_FRONTEND=noninteractive
+
+# Pin to direct HTTP mirror (avoids HTTPS redirect failures on Docker Desktop macOS)
+RUN echo 'deb http://kali.download/kali kali-rolling main contrib non-free non-free-firmware' > /etc/apt/sources.list && \
+    echo 'Acquire::https::Verify-Peer "false";' > /etc/apt/apt.conf.d/99docker && \
+    echo 'Acquire::https::Verify-Host "false";' >> /etc/apt/apt.conf.d/99docker && \
+    echo 'Acquire::http::Pipeline-Depth "0";' >> /etc/apt/apt.conf.d/99docker
+
+# Core utilities
+RUN apt-get update && apt-get install -y \
+    curl wget git python3 python3-pip openssh-client ca-certificates \
+    vim jq tree less \
+    && rm -rf /var/lib/apt/lists/*
+
+# Recon tools
+RUN apt-get update && apt-get install -y \
+    nmap masscan dnsutils whois \
+    && rm -rf /var/lib/apt/lists/*
+
+# Web tools
+RUN apt-get update && apt-get install -y \
+    gobuster dirb nikto sqlmap ffuf \
+    && rm -rf /var/lib/apt/lists/*
+
+# Networking + Enum
+RUN apt-get update && apt-get install -y \
+    netcat-traditional socat proxychains4 enum4linux smbclient \
+    && rm -rf /var/lib/apt/lists/*
+
+# Password cracking
+RUN apt-get update && apt-get install -y \
+    john hashcat hydra \
+    && rm -rf /var/lib/apt/lists/*
+
+# Metasploit (largest)
+RUN apt-get update && apt-get install -y \
+    metasploit-framework \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Download linpeas and pspy
+RUN mkdir -p /opt/tools && \
+    curl -sL https://github.com/peass-ng/PEASS-ng/releases/latest/download/linpeas.sh \
+        -o /opt/tools/linpeas.sh && \
+    chmod +x /opt/tools/linpeas.sh
+
+WORKDIR /workspace
+
+CMD ["bash"]

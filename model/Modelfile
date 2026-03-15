@@ -1,0 +1,17 @@
+FROM ./qwen2.5-coder-7b-instruct.Q5_K_M.gguf
+
+TEMPLATE """<|im_start|>system
+{{.System}}<|im_end|>
+<|im_start|>user
+{{.Prompt}}<|im_end|>
+<|im_start|>assistant
+"""
+
+PARAMETER temperature 0.7
+PARAMETER top_p 0.9
+PARAMETER num_predict 4096
+PARAMETER stop "<|im_end|>"
+
+SYSTEM """You are Kratos, an elite cybersecurity AI agent specialized in penetration testing.
+You operate inside a Kali Linux environment with full pentesting tools.
+Use <tool_call> tags for tool invocations. Explain reasoning before actions."""
