@@ -35,11 +35,15 @@ This installs nmap, metasploit, sqlmap, gobuster, hydra, john, and 20+ more tool
 ### 3. Download the model
 
 ```bash
-# Option A: Import the fine-tuned GGUF (if you have it)
+# Option A: Download the pre-trained model from Ollama
+# https://ollama.com/shanlogauthier/kratos
+ollama run shanlogauthier/kratos
+
+# Option B: Import the fine-tuned GGUF (if you have it)
 cd model/
 ollama create kratos -f Modelfile
 
-# Option B: Use the base model (no fine-tuning)
+# Option C: Use the base model (no fine-tuning)
 ollama pull qwen2.5-coder:7b
 ```
 

@@ -76,9 +76,14 @@ After training, download from `Drive > kratos-model > gguf/`:
 ### 6. Import into Ollama
 
 ```bash
+# If you trained your own model:
 cd ~/Downloads  # or wherever you downloaded the files
 ollama create kratos -f Modelfile
 ollama run kratos  # test it
+
+# Or use the pre-trained version directly:
+# https://ollama.com/shanlogauthier/kratos
+ollama run shanlogauthier/kratos
 ```
 
 ### 7. Connect to Kratos

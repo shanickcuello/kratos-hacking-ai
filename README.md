@@ -45,7 +45,7 @@ cd kratos-hacking-ai
 # Or run ./run.sh for automatic initialization
 uv pip install -e ".[tui]"
 docker compose -f docker/docker-compose.yml build
-ollama pull shanlogauthier/kratos
+ollama run shanlogauthier/kratos  # https://ollama.com/shanlogauthier/kratos
 uv run kratos --target 10.10.10.50
 ```
 
