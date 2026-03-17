@@ -42,6 +42,7 @@ kratos ❯ scan the target for open ports
 ```bash
 git clone https://github.com/shanickcuello/kratos-hacking-ai.git
 cd kratos-hacking-ai
+# Or run ./run.sh for automatic initialization
 uv pip install -e ".[tui]"
 docker compose -f docker/docker-compose.yml build
 ollama pull shanlogauthier/kratos

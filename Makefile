@@ -7,10 +7,10 @@ dev:
 	uv pip install -e ".[dev,tui]"
 
 run:
-	kratos
+	uv run kratos
 
 run-target:
-	kratos --target $(TARGET)
+	uv run kratos --target $(TARGET)
 
 build-kali:
 	docker build -t kratos-kali -f docker/Dockerfile.kali docker/
