@@ -18,7 +18,6 @@ from kratos.domain.entities import (
     ToolResult,
 )
 from kratos.domain.ports import DockerPort, LLMPort, UIPort
-from kratos.tools import get_all_tools
 from kratos.tools.guardrails import check_command
 
 logger = logging.getLogger(__name__)
@@ -39,7 +38,7 @@ def _parse_tool_calls_from_text(text: str) -> list[ToolCall]:
     """Extract tool-call JSON blocks from assistant text."""
     calls: list[ToolCall] = []
     for pattern in _TOOL_CALL_PATTERNS:
-        for i, match in enumerate(pattern.finditer(text)):
+        for match in pattern.finditer(text):
             try:
                 data = json.loads(match.group(1))
                 if "name" in data:
@@ -290,7 +289,9 @@ async def run_react_loop(
         # Agent loop: keep calling tools until LLM stops requesting them
         while True:
             # No native tool calling — model uses <tool_call> tags
+            await ui.start_thinking("Kratos is analyzing")
             response = await llm.chat(state.messages)
+            await ui.stop_thinking()
             parsed_calls = _parse_tool_calls_from_text(
                 response.content or ""
             )
@@ -306,12 +307,14 @@ async def run_react_loop(
             state.messages.append(response)
 
             for tc in parsed_calls:
+                await ui.start_thinking(f"Running {tc.name}")
                 await ui.display_status(
                     f"Running: {tc.name}({tc.arguments})"
                 )
                 result = await _execute_tool(
                     tc.name, tc.arguments, docker
                 )
+                await ui.stop_thinking()
                 await ui.display_tool_output(tc.name, result.output)
                 state.messages.append(
                     Message(

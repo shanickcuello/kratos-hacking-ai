@@ -5,10 +5,10 @@ from __future__ import annotations
 import asyncio
 from collections.abc import Callable
 
-from textual import on, work
+from textual import on
 from textual.app import App, ComposeResult
 from textual.binding import Binding
-from textual.containers import Horizontal, Vertical
+from textual.containers import Horizontal
 from textual.css.query import NoMatches
 from textual.widgets import Footer, Header, Input, RichLog, Static
 
@@ -139,6 +139,11 @@ class TuiAdapter(UIPort):
 
     async def get_user_input(self) -> str:
         return await self._app.wait_for_input()
-
     async def stream_token(self, token: str) -> None:
         self._app.write_chat(token)
+
+    async def start_thinking(self, message: str = "Thinking") -> None:
+        self._app.set_status(f"[cyan]⏳ {message}...[/]")
+
+    async def stop_thinking(self) -> None:
+        self._app.set_status("Ready")

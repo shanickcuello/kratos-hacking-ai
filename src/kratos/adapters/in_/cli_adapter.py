@@ -5,8 +5,10 @@ from __future__ import annotations
 from prompt_toolkit import PromptSession
 from prompt_toolkit.formatted_text import HTML
 from rich.console import Console
+from rich.live import Live
 from rich.markdown import Markdown
 from rich.panel import Panel
+from rich.spinner import Spinner
 from rich.text import Text
 
 from kratos.domain.ports import UIPort
@@ -19,6 +21,7 @@ class CliAdapter(UIPort):
 
     def __init__(self):
         self._prompt = PromptSession()
+        self._live: Live | None = None
 
     async def display_assistant(self, text: str) -> None:
         """Display assistant message with markdown rendering."""
@@ -45,7 +48,22 @@ class CliAdapter(UIPort):
 
     async def display_status(self, status: str) -> None:
         """Display a status message."""
+        if self._live:
+            self._live.stop()
+            self._live = None
         console.print(f"[dim]{status}[/dim]")
+
+    async def start_thinking(self, message: str = "Kratos thinking") -> None:
+        """Show a spinner while the model is thinking."""
+        spinner = Spinner("dots", text=f"[bold cyan]{message}...[/bold cyan]")
+        self._live = Live(spinner, console=console)
+        self._live.start()
+
+    async def stop_thinking(self) -> None:
+        """Stop the spinner."""
+        if self._live:
+            self._live.stop()
+            self._live = None
 
     async def get_user_input(self) -> str:
         """Get input from the user with styled prompt."""

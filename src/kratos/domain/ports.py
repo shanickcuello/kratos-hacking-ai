@@ -8,9 +8,8 @@ from __future__ import annotations
 
 from abc import ABC, abstractmethod
 from collections.abc import AsyncIterator
-from typing import Any
 
-from kratos.domain.entities import Message, ToolDefinition, ToolResult
+from kratos.domain.entities import Message, ToolDefinition
 
 
 class LLMPort(ABC):
@@ -81,3 +80,11 @@ class UIPort(ABC):
     @abstractmethod
     async def stream_token(self, token: str) -> None:
         """Display a single streamed token."""
+
+    @abstractmethod
+    async def start_thinking(self, message: str = "Thinking") -> None:
+        """Show visual indication that the model is thinking."""
+
+    @abstractmethod
+    async def stop_thinking(self) -> None:
+        """Stop the thinking indicator."""
