@@ -10,6 +10,16 @@ An open-source, local-first AI agent for penetration testing and CTF challenges.
 
 No API keys. No cloud. Everything runs on your machine.
 
+## Showcase
+
+With kratos model https://ollama.com/shanlogauthier/kratos
+
+https://github.com/user-attachments/assets/11bd1f05-80e0-4c78-bfc2-4ff9b18f635f
+
+With dophin from ollama
+
+https://github.com/user-attachments/assets/a7080a47-32c3-460c-8e0a-5d64a81c32ee
+
 ## What it does
 
 You tell Kratos what to hack. It reasons through the attack, calls pentesting tools (nmap, sqlmap, gobuster, metasploit...) inside a Kali Docker container, analyzes the output, and plans the next step — autonomously.
