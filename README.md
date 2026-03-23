@@ -12,7 +12,7 @@ No API keys. No cloud. Everything runs on your machine.
 
 ## Showcase
 
-With kratos model https://ollama.com/shanlogauthier/kratos
+With kratos model https://ollama.com/shanlogauthier/kratos (WIP)
 
 https://github.com/user-attachments/assets/11bd1f05-80e0-4c78-bfc2-4ff9b18f635f
 
