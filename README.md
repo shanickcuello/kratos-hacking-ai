@@ -14,11 +14,11 @@ No API keys. No cloud. Everything runs on your machine.
 
 With kratos model https://ollama.com/shanlogauthier/kratos (WIP)
 
-https://github.com/user-attachments/assets/11bd1f05-80e0-4c78-bfc2-4ff9b18f635f
+https://github.com/user-attachments/assets/340dcba5-0b0b-405d-87d9-8a707fd4d75e
 
 With dophin from ollama
 
-https://github.com/user-attachments/assets/a7080a47-32c3-460c-8e0a-5d64a81c32ee
+https://github.com/user-attachments/assets/7d0da314-9bdf-4f6a-9ab5-61aefd19264e
 
 ## What it does
 
