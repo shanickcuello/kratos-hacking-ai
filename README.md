@@ -55,6 +55,27 @@ uv run kratos --target 10.10.10.50
 - **[Training Guide](docs/TRAINING.md)** — Replicate the fine-tuning pipeline from scratch
 - **[Architecture](docs/ARCHITECTURE.md)** — System design, diagrams, and project structure
 
+## Using a Different Model
+
+Kratos works with any Ollama model. To use an alternative (e.g. uncensored or larger):
+
+```bash
+ollama run dolphin3                     # download once
+KRATOS_MODEL=dolphin3 uv run kratos --target 10.10.10.50
+```
+
+Or set it permanently in `.env`:
+
+```bash
+KRATOS_MODEL=dolphin3
+```
+
+Recommended alternatives for pentesting:
+- **dolphin3** — uncensored, supports function calling, 8B (~8 GB RAM)
+- **dolphin-mixtral:8x7b** — more powerful, needs ~32 GB RAM
+- **nous-hermes2** — good reasoning, less censored
+- **mistral:7b** — strong tool calling, lightweight
+
 ## Tech Stack
 
 - **Model**: Qwen2.5-Coder-7B fine-tuned with QLoRA (Unsloth)

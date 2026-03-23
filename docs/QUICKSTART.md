@@ -52,9 +52,30 @@ ollama pull qwen2.5-coder:7b
 ```bash
 cp .env.example .env
 # Edit .env:
-#   KRATOS_MODEL=kratos          (fine-tuned)
+#   KRATOS_MODEL=kratos            (fine-tuned)
 #   KRATOS_MODEL=qwen2.5-coder:7b  (base model)
 ```
+
+#### Using a different model
+
+Kratos works with any Ollama model. For pentesting, an uncensored model with function calling support is recommended:
+
+```bash
+# Download the model
+ollama run dolphin3
+
+# Run kratos with it (one-off)
+KRATOS_MODEL=dolphin3 uv run kratos --target 10.10.10.50
+
+# Or set it permanently in .env
+# KRATOS_MODEL=dolphin3
+```
+
+Recommended alternatives:
+- **dolphin3** — uncensored, function calling, 8B (~8 GB RAM)
+- **dolphin-mixtral:8x7b** — more powerful, needs ~32 GB RAM
+- **nous-hermes2** — good reasoning, less censored
+- **mistral:7b** — strong tool calling, lightweight
 
 ### 5. Run
 
